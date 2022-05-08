@@ -1,0 +1,30 @@
+# bind address, use empty string to bind to all interfaces
+bind_address=""
+# backend listen port
+listen_port=80
+# proxy protocol port, use 0 to disable
+proxyprotocol_port=0
+# Server location
+server_lat=-34.0385695301521
+server_lng=-117.82135496143289
+# ipinfo.io API key, if applicable
+ipinfo_api_key=""
+
+# assets directory path, defaults to `assets` in the same directory
+assets_path=""
+
+# password for logging into statistics page
+statistics_password="PASSWORD"
+# redact IP addresses
+redact_ip_addresses=false
+
+# database type for statistics data, currently supports: none, memory, bolt, mysql, postgresql
+# if none is specified, no telemetry/stats will be recorded, and no result PNG will be generated
+database_type="postgresql"
+database_hostname="localhost"
+database_name="speedtest"
+database_username="brandon"
+database_password=""
+
+# if you use `bolt` as database, set database_file to database file location
+database_file=""

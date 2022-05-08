@@ -1,0 +1,13 @@
+[Unit]
+Description=Open Source Speed Testing Server
+Wants=network.target
+
+[Service]
+User=speedtest
+Group=speedtest
+Restart=on-failure
+WorkingDirectory=/home/speedtest/speedtest-assets
+ExecStart=/home/speedtest/speedtest-assets/speedtest
+
+[Install]
+WantedBy=multi-user.target
