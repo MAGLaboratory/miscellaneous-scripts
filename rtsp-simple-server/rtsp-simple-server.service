@@ -1,0 +1,14 @@
+[Unit]
+Wants=network.target
+Description=Survieillance Camera RTSP Proxy
+
+[Service]
+User=rtsp
+Group=rtsp
+Restart=always
+RestartSec=30
+WorkingDirectory=/home/rtsp/rtsp
+ExecStart=/home/rtsp/rtsp/rtsp-simple-server
+
+[Install]
+WantedBy=multi-user.target
