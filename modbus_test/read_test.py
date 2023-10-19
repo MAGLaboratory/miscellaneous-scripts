@@ -19,7 +19,7 @@ pnt_time = True
 sleep_wait = 0.0
 
 #timeout_list = []
-timeout_list = [0.010]
+timeout_list = [0.020]
 
 #for i in range(10):
 #    timeout_list.append(i * 0.001 + 0.005)
@@ -33,7 +33,7 @@ for target_timeout in timeout_list:
     errors = ""
     e_counter = 0
     
-    instr = minimalmodbus.Instrument("/dev/ttyUSB0", 1, debug = 1)
+    instr = minimalmodbus.Instrument("/dev/ttyUSB0", 255)
     instr.serial.baudrate = 38400
     instr.serial.timeout = target_timeout
     print("Timeout: " + str(instr.serial.timeout))
@@ -44,7 +44,7 @@ for target_timeout in timeout_list:
         start_time = datetime.datetime.now()
     for i in range(testing_count):
         try:
-            dummy = instr.read_registers(0x00, 3)
+            dummy = instr.read_registers(0x00, 1)
             c_co = 0
             succ += 1
             if progress:
