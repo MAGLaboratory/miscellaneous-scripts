@@ -1,0 +1,197 @@
+Script started on 2023-09-03 19:40:19-07:00 [TERM="screen" TTY="/dev/pts/5" COLUMNS="136" LINES="32"]
+[?2004hbrandon@think001:~/projects/miscellaneous-scripts/modbus_test$ mod[K[K[Kpython3
+[?2004lPython 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import minimalmodbus
+>>> instr = minimalmodbus.Instrument("/dev/ttyUSB0", 255)
+>>> instr.serial.maudr[K[K[K[K[Kbaudrate = 38400
+>>> instr.serial.timeout = ta[K[K0.010
+>>> instr.read_registers(0x01, 1)
+[0]
+>>> instr.read_registers(0x00, 1)
+[194]
+>>> instr.write_register(0x01, 0xDEFA)
+>>> instr.read_registers(0x01[K2, 1)
+[511]
+>>> instr.write_register(0x02, 257)
+>>> instr.read_registers(0x02, 1)
+[257]
+>>> instr.write_register(0x01, 0xF[K5AAF[K[K[K[Ka[KA5AF)
+>>> instr.read_registers(0x02 [K, 1)
+[257]
+>>> instr.read_registers(0x01, 1)
+[2]
+>>> instr.read_registers(0x01, 51[K[K0x51[KAAF)[1P[1P[1P[1P[1P[1P[1@w[1@w[1P[C[1@r[1@i[1@t[1@e[1@_
+>>> instr.read_registers(0x01, 1)
+[2]
+>>> instr.write_register(0x1[K01, 0X[Kx5faf[K[K[KFAF)
+>>> instr.read_register(0x01 [K, 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 484, in read_register
+    returnvalue = self._generic_command(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1353, in _perform_command
+    response_bytes = self._communicate(request_bytes, number_of_bytes_to_read)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1521, in _communicate
+    raise NoResponseError("No communication with the instrument (no answer)")
+minimalmodbus.NoResponseError: No communication with the instrument (no answer)
+>>> instr.
+instr.address                                instr.read_bits(                             instr.write_bit(
+instr.clear_buffers_before_each_transaction  instr.read_float(                            instr.write_bits(
+instr.close_port_after_each_call             instr.read_long(                             instr.write_float(
+instr.debug                                  instr.read_register(                         instr.write_long(
+instr.handle_local_echo                      instr.read_registers(                        instr.write_register(
+instr.mode                                   instr.read_string(                           instr.write_registers(
+instr.precalculate_read_size                 instr.roundtrip_time                         instr.write_string(
+instr.read_bit(                              instr.serial                                 
+>>> instr.address = 1
+>>> instr.read_register(0x01, 1)
+0.3
+>>> instr.read_register(0x01, 1)[1@s
+[3]
+>>> instr.write_register(0x01, 0xDEFA)
+>>> instr.write_register(0x01, 0xDEFA)[C[C[C[C[Kinstr.write_register(0x01, 0xDEFA)[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kread_register(0x01[K0, 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 484, in read_register
+    returnvalue = self._generic_command(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1353, in _perform_command
+    response_bytes = self._communicate(request_bytes, number_of_bytes_to_read)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1521, in _communicate
+    raise NoResponseError("No communication with the instrument (no answer)")
+minimalmodbus.NoResponseError: No communication with the instrument (no answer)
+>>> instr [K.read_register(0x01[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kaddress = 255
+>>> instr.address = 255[C[C[C[C[C[C[C[C[C[Cread_register(0x00, 1)
+13
+>>> instr.read_register(0x00, 1)[1@s
+[130]
+>>> hex(130)
+'0x82'
+>>> hex(130)[C[C[C[C[Kinstr.read_registers(0x00, 1)
+[130]
+>>> instr.read_registers(0x00, 1)
+[130]
+>>> instr.read_registers(0x00, 1)
+[130]
+>>> instr.read_registers()[K0x001[K, 1)
+[130]
+>>> instr.write_register(0x01, 0xDEFA)
+>>> instr.read_register(0x01 ,1)[1@s
+[2]
+>>> instr.write_registers(0x0[K[K[K[K[K(0x02, 257)
+>>> instr.read_rge[K[Kegister(0x02),) )1)[1@s
+[257]
+>>> inswr[K[Ktr.write_register(0x01, 0xAFF[K[K[K5AAF)[K[K[K[KFAF);
+>>> instr.read_register(0x02)[K[K[K[K[K[Ks ([K[K(0x02, 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 927, in read_registers
+    returnvalue = self._generic_command(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1353, in _perform_command
+    response_bytes = self._communicate(request_bytes, number_of_bytes_to_read)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1521, in _communicate
+    raise NoResponseError("No communication with the instrument (no answer)")
+minimalmodbus.NoResponseError: No communication with the instrument (no answer)
+>>> instr.address = 1
+>>> instr.address = 1read_registers(0x02, 1)
+[257]
+>>> instr.write_a[Kregister(0x0[K[K[K0x01, x[K0xDEFA)
+>>> instr.write_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x02, 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 927, in read_registers
+    returnvalue = self._generic_command(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1353, in _perform_command
+    response_bytes = self._communicate(request_bytes, number_of_bytes_to_read)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1521, in _communicate
+    raise NoResponseError("No communication with the instrument (no answer)")
+minimalmodbus.NoResponseError: No communication with the instrument (no answer)
+>>> instr.[K[K[K[K[K[Kinstr.address = 255
+>>> instr.address = 255[C[C[C[C[C[C[C[C[C[Cread_registers(0x02, 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 927, in read_registers
+    returnvalue = self._generic_command(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1359, in _perform_command
+    payload_from_slave = _extract_payload(
+                         ^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1918, in _extract_payload
+    _check_response_slaveerrorcode(response)
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 3584, in _check_response_slaveerrorcode
+    raise error
+minimalmodbus.SlaveReportedException: Slave reported error code 0
+>>> instr.read_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[C[10Paddress = 255[C[C[C[C[C[C[C[C[C[Cread_registers(0x02, 1)[1P[1@1[1P[1@0
+[130]
+>>> instr.read_registers(0x00, 1)[C[C[C[C[Kinstr.read_registers(0x00, 1)2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[10Paddress = 255[C[C[C[C[C[C[C[C[C[Cread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xDEFA)
+>>> instr.write_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[10Paddress = 255[C[C[C[C[C[C[C[C[C[Cread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[C[12Paddress = 1read_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x5FAF);[C[C[C[C[C[C[C[C[C[C[6Pread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x02, 257)[C[C[C[C[C[C[C[C[C[C[2Pread_registers(0x01 ,1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)[C[C[C[Chex(130)[K[C[C[C[Cinstr.read_registers(0x00, 1)[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[9Paddress = 255[C[C[C[C[C[C[C[C[C[Cread_register(0x00, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x01, 1)[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[11Paddress = 1read_register(0x01, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x5FAF)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x01, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x5AAF)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x01, 1)2[C[C[C[C[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xA5AF)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x02, 257)[C[C[C[C[C[C[C[C[C[C[2Pread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x02, 257)
+>>> instr.write_register(0x02, 257)1, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[10Paddress = 255[C[C[C[C[C[C[C[C[C[Cread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[C[12Paddress = 1read_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x5FAF);
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 552, in write_register
+    self._generic_command(
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1359, in _perform_command
+    payload_from_slave = _extract_payload(
+                         ^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1904, in _extract_payload
+    raise InvalidResponseError(text)
+minimalmodbus.InvalidResponseError: Checksum error in rtu mode: b'\x01E' instead of b'5D' . The response is: b'\xff\x10\x00\x01\x00\x01E' (plain response: b'\xff\x10\x00\x01\x00\x01E')
+>>> instr.write_register(0x01, 0x5FAF);
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 552, in write_register
+    self._generic_command(
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1353, in _perform_command
+    response_bytes = self._communicate(request_bytes, number_of_bytes_to_read)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1521, in _communicate
+    raise NoResponseError("No communication with the instrument (no answer)")
+minimalmodbus.NoResponseError: No communication with the instrument (no answer)
+>>> instr.write_register(0x01, 0x5FAF);[4P2, 257)1, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[10Paddress = 255[C[C[C[C[C[C[C[C[C[Cread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[C[10Paddress = 255[K[K[K255
+>>> instr.address = 255[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x5FAF);[4P2, 257)1, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)2[C[C[C[C0[C[C[C[C
+[130]
+>>> instr.read_registers(0x00, 1)[C[C[C[C[C[C[C[C[C[C[10Paddress = 255[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x5FAF);[4P2, 257)1, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xDEFA)
+>>> instr.write_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)[C[C[C[C[C[C[C[C[C[C[10Paddress = 255[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x5FAF);[4P2, 257)
+>>> instr.write_register(0x02, 257)1, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)[C[C[C[C[C[C[C[C[C[C[10Paddress = 255[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x5FAF);
+>>> instr.write_register(0x01, 0x5FAF);[4P2, 257)1, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xDEFA)[3P2, 257)1, 0x5FAF);[C[C[C[C[Kinstr.address = 1
+>>> instr.address = 1write_register(0x01, 0x5FAF);[4P2, 257)1, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)
+[130]
+>>> instr.read_registers(0x00, 1)[C[C[C[C[C[C[C[C[C[C[12Paddress = 1write_register(0x01, 0x5FAF);[4P2, 257)1, 0x5FAF);[4P2, 257)1, 0xDEFA)
+>>> instr.write_register(0x01, 0xDEFA)[C[C[C[C[Kinstr.write_register(0x01, 0xDEFA)[C[C[C[C[Kinstr.write_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0xDEFA)[C[C[C[C[Kinstr.write_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 1)
+[2]
+>>> print("Imagine that, my code working..."). working..."). working..."). working...")
+Imagine that, my code... working...
+>>> exit()
+[?2004hbrandon@think001:~/projects/miscellaneous-scripts/modbus_test$ exit
+[?2004lexit
+
+Script done on 2023-09-03 21:01:18-07:00 [COMMAND_EXIT_CODE="0"]

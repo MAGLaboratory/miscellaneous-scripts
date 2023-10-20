@@ -1,0 +1,105 @@
+Script started on 2023-09-03 18:12:41-07:00 [TERM="screen" TTY="/dev/pts/5" COLUMNS="136" LINES="32"]
+[?2004hbrandon@think001:~/projects/miscellaneous-scripts/modbus_test$ python3
+[?2004lPython 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import minimalmodbus
+>>> instr = minimalmodbus.Instrument("/dev/ttyUSB0", 255)
+>>> instr.serial.baudrate = 38400
+>>> instr.serial.timeout = 0.01
+>>> instr.read_registers(0x00 [K, 0[K1)
+[194]
+>>> instr.re[K[Kread_registers(0x00, 2)
+[194, 0]
+>>> instr.write_registers(0x01 [K, 0x100)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 965, in write_registers
+    raise TypeError(
+TypeError: The "values parameter" must be a list. Given: 256
+>>> instr.write_registers(0x01, 0x100)[C[1P
+>>> instr.write_register(0x01, 0x100)[1@s[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x00, 2)
+[194, 0]
+>>> instr.read_registers(0x00, 2)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x100)[C[1P)[1P)[1P)[C[C[C[C[C[C[C[C[C[C[1Pread_registers(0x00, 2)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x)s(0x01, 0x100)[4P(0x01, 0x)[C[C[C[C[C[C[C[C[C[C[1Pread_registers(0x00, 2)[C[1P[1@2[C[C[C[1P)1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 927, in read_registers
+    returnvalue = self._generic_command(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1359, in _perform_command
+    payload_from_slave = _extract_payload(
+                         ^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1918, in _extract_payload
+    _check_response_slaveerrorcode(response)
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 3584, in _check_response_slaveerrorcode
+    raise error
+minimalmodbus.SlaveReportedException: Slave reported error code 0
+>>> instr.read_registers(0x02, 1)0, 2)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x01, 0x)s(0x01, 0x100)[4P(0x01, 0x)D)E)F)A)
+>>> instr.write_register(0x01, 0xDEFA)
+>>> instr.read_register(0x02, 1)[1@s
+[511]
+>>> instr.read_registeR[Kr([Ks(0x01, 1)
+[2]
+>>> 511 >>  8[K[K8
+1
+>>> 511  [K* 0[K[K[K& 0xFF
+255
+>>> 511 & 0xFF[C[C[C[C[K511 & 0xFF[2P>> 8[C[C[C[Cinstr.read_registers(0x01, 1)[C[C[C[C511 >> 8[K& 0xFF[C[C[C[C[Kinstr.[K[K[K[K[K[K1 << 8 
+256
+>>> 256 + 1
+257
+>>> instr.write_register(0x02, 257)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 552, in write_register
+    self._generic_command(
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1359, in _perform_command
+    payload_from_slave = _extract_payload(
+                         ^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1904, in _extract_payload
+    raise InvalidResponseError(text)
+minimalmodbus.InvalidResponseError: Checksum error in rtu mode: b'\x01\xb5' instead of b'5\xb4' . The response is: b'\xff\x10\x00\x02\x00\x01\xb5' (plain response: b'\xff\x10\x00\x02\x00\x01\xb5')
+>>> instr.write_register(0x02, 257)[C[C[C[C256 + 1[K[C[C[C[C1 << 8 [C[C[C[C511 & 0xFF[2P>> 8[C[C[C[Cinstr.read_registers(0x01, 1)2[C[C[C[C
+[511]
+>>> instr.read_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x02, 257)[C[C[C[C256 + 1[K[C[C[C[C1 << 8 [C[C[C[C256 + 1[C[C[C[Cinstr.write_register(0x02, 257)
+>>> instr.write_register(0x02, 257)[C[C[C[C[C[C[C[C[C[C[2Pread_registers(0x02, 1)
+[511]
+>>> instr.read_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x02, 257)
+>>> instr.write_register(0x02, 257)[C[C[C[C[C[C[C[C[C[C[2Pread_registers(0x02, 1)
+[511]
+>>> instr.read_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x02, 257)[C[C[C[C[C[C[C[C[C[C[2Pread_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register(0x02, 257)[1P)[1P)[1P)2)5)6)[1P)[1P)[1P)1)
+>>> instr.write_register(0x02, 1)[C[C[C[C[C[C[C[C[C[Cread_registers[C[C[C[C[C[C[C[C[C
+[257]
+>>> instr.read_registers(0x02, 1)
+[257]
+>>> instr.read_registers(0x02, 1)[C[C[C[C[C[C[C[C[C[Cwrite_register[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cread_registers[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cwrite_register[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cread_registers[C[C[C[C[C[C[C[C[C[C[C[C[C[Kinstr.read_registers(0x02, 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 927, in read_registers
+    returnvalue = self._generic_command(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1359, in _perform_command
+    payload_from_slave = _extract_payload(
+                         ^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1918, in _extract_payload
+    _check_response_slaveerrorcode(response)
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 3584, in _check_response_slaveerrorcode
+    raise error
+minimalmodbus.SlaveReportedException: Slave reported error code 0
+>>> exit()
+[?2004hbrandon@think001:~/projects/miscellaneous-scripts/modbus_test$ 
+[?2004l[?2004hbrandon@think001:~/projects/miscellaneous-scripts/modbus_test$ 
+[?2004l[?2004hbrandon@think001:~/projects/miscellaneous-scripts/modbus_test$ ls
+[?2004l[0m[01;32mpower_line_test.py[0m  [01;32mread_test.py[0m  typescript  typescript_code_problem_0  [01;32mwrite_multiple_test.py[0m  [01;32mwrite_test.py[0m
+[?2004hbrandon@think001:~/projects/miscellaneous-scripts/modbus_test$ exit
+[?2004lexit
+
+Script done on 2023-09-03 19:01:15-07:00 [COMMAND_EXIT_CODE="0"]

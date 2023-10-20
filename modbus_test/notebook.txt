@@ -1,0 +1,52 @@
+# this is not supposed to be valid python or anything.  it is kept as a notebook on commands run to test the iot sv.
+import minimalmodbus
+
+sv = minimalmodbus.Instrument("/dev/ttyUSB0", 255)
+sv.serial.baudrate = 38400
+sv.serial.timeout = 0.01 # 10 ms
+
+# function to convert ADC register reads into printable information
+def ADCregPrint(read):
+  num = read[0] >> 10
+  lsbs = read[0] & 0x3FF
+  print("Number: " + str(num))
+  print("Counts: " + str(lsbs))
+
+# read the status register to tell if the supervisor is alive or not
+# read the configruation status register to tell if we are in configuration idle
+sv.read_registers(0x00, 2)
+
+# should fail if we are not in the right configuration mode
+sv.read_registers(0x02, 1)
+
+# enter configuration cache mode
+# the default password is 0xDEFA
+sv.write_register(0x01, 0xDEFA)
+
+# should be 2 if we entered configuration cache mode
+sv.read_registers(0x01, 1)
+
+# should not fail if we are in the correct configuration mode
+# should be 511 if the unit was not previously configured
+# 257 otherwise
+sv.read_registers(0x02, 1)
+
+# write the correct sid to the unit
+# note that it is like this because the 9th bit is 256 and the sid (lower byte) is set to 1
+sv.write_register(0x02, 257)
+
+# should read back correctly as 257
+sv.read_registers(0x02, 1)
+
+# commit command is 0x5FAF
+# cancel command is 0x0000
+sv.write_register(0x01, 0x5FAF)
+
+# read should fail because it moved
+sv.read_registers(0x00, 1)
+
+# set the modbus library to use another addre
+sv.address = 1
+
+# read should succeed
+sv.read_registers(0x00, 1)

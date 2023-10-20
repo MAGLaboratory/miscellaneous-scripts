@@ -1,0 +1,63 @@
+Script started on 2023-09-03 17:49:14-07:00 [TERM="screen" TTY="/dev/pts/5" COLUMNS="136" LINES="32"]
+[?2004hbrandon@think001:~/projects/miscellaneous-scripts/modbus_test$ python3
+[?2004lPython 3.11.2 (main, Mar 13 2023, 12:18:29) [GCC 12.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import minimalmodbus
+>>> instr = minimalmodbus.Instrument("/dev/ttyUSB0", 255)
+>>> instr.serial.baudrate=38400
+>>> instr.serial.timeout = 0.010
+>>> instr.read_registers(0x00, 1)
+[194]
+>>> 194.tohex
+  File "<stdin>", line 1
+    194.tohex
+       ^
+SyntaxError: invalid decimal literal
+>>> hex(194)
+'0xc2'
+>>> ni[K[Kinstr.read_registers(0x01, 1)
+[0]
+>>> instr.write_register(0x01, 0xDEFA)
+>>> instr.write_register(0x01, 0xDEFA)[C[C[C[C[C[C[C[C[C[C[5Pread_registers(0x01, 1)
+[2]
+>>> instr.read_registers(0x02, 1)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 927, in read_registers
+    returnvalue = self._generic_command(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1359, in _perform_command
+    payload_from_slave = _extract_payload(
+                         ^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1918, in _extract_payload
+    _check_response_slaveerrorcode(response)
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 3584, in _check_response_slaveerrorcode
+    raise error
+minimalmodbus.SlaveReportedException: Slave reported error code 0
+>>> instr.read_registers(0x02, 1)1[C[C[C[C
+[2]
+>>> instr.read_registers(0x01, 1)2[C[C[C[C
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 927, in read_registers
+    returnvalue = self._generic_command(
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1276, in _generic_command
+    payload_from_slave = self._perform_command(functioncode, payload_to_slave)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1359, in _perform_command
+    payload_from_slave = _extract_payload(
+                         ^^^^^^^^^^^^^^^^^
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 1918, in _extract_payload
+    _check_response_slaveerrorcode(response)
+  File "/home/brandon/.local/lib/python3.11/site-packages/minimalmodbus.py", line 3584, in _check_response_slaveerrorcode
+    raise error
+minimalmodbus.SlaveReportedException: Slave reported error code 0
+>>> quit()
+[?2004hbrandon@think001:~/projects/miscellaneous-scripts/modbus_test$ exit
+[?2004lexit
+
+Script done on 2023-09-03 18:10:48-07:00 [COMMAND_EXIT_CODE="0"]
