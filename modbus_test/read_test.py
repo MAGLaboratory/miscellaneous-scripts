@@ -33,7 +33,7 @@ for target_timeout in timeout_list:
     errors = ""
     e_counter = 0
     
-    instr = minimalmodbus.Instrument("/dev/ttyUSB0", 255)
+    instr = minimalmodbus.Instrument("/dev/ttyUSB0", 1)
     instr.serial.baudrate = 38400
     instr.serial.timeout = target_timeout
     print("Timeout: " + str(instr.serial.timeout))
