@@ -14,16 +14,17 @@ signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
 
 # settings
-testing_count = 10000000
+testing_count = 1000
 progress = 1
 pnt_time = True
+pnt_except = True
 sleep_wait = 0.0
 
-#timeout_list = []
-timeout_list = [0.010, 0.011, 0.012]
+timeout_list = []
+#timeout_list = [0.10, 0.11, 0.12]
 
-#for i in range(10):
-#    timeout_list.append(i * 0.001 + 0.005)
+for i in range(10):
+    timeout_list.append(i * 0.001 + 0.006)
 
 
 for target_timeout in timeout_list:
@@ -34,7 +35,7 @@ for target_timeout in timeout_list:
     errors = ""
     e_counter = 0
     
-    instr = minimalmodbus.Instrument("/dev/ttyUSB0", 1)
+    instr = minimalmodbus.Instrument("COM4", 255)
     instr.serial.baudrate = 38400
     instr.serial.timeout = target_timeout
     print("Timeout: " + str(instr.serial.timeout))
@@ -48,7 +49,7 @@ for target_timeout in timeout_list:
         start_time = datetime.datetime.now()
     for i in range(testing_count):
         try:
-            dummy = instr.read_registers(0x00, 2)
+            dummy = instr.read_registers(0x00, 1)
             c_co = 0
             succ += 1
             if progress == 1:
@@ -82,8 +83,9 @@ for target_timeout in timeout_list:
         bar.finish()
     print("Success: " + str(succ), ", Failure: " + str(fail), end='')
     print(", Consecutive Failures: " + str(cons))
-    print("Exceptions encountered:")
-    print(errors)
+    if pnt_except:
+        print("Exceptions encountered:")
+        print(errors)
     if p_exit:
         break
     
