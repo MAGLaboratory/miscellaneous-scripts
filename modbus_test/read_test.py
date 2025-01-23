@@ -15,7 +15,7 @@ signal.signal(signal.SIGTERM, signal_handler)
 
 # settings
 testing_count = 1000
-progress = 1
+progress = 2
 pnt_time = True
 pnt_except = True
 sleep_wait = 0.0

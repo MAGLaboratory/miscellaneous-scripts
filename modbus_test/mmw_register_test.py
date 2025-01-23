@@ -13,7 +13,7 @@ my_64bit_data = {0x08: 0xA5123456789AA500}
 instr = minimalmodbus.Instrument("COM4", 255)
 instr.address = 255
 instr.serial.baudrate = 38400
-instr.serial.timeout = 0.5
+instr.serial.timeout = 0.07
 
 print("Checking communication.")
 
