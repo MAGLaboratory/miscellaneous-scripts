@@ -47,25 +47,36 @@ print("Now checking registers...")
 time.sleep(1);
 print("Reading 16-bit registers")
 tmp_16bit_data = instr.read_registers(0x00, 4)
-print(tmp_16bit_data)
 assert (tmp_16bit_data == my_16bit_data)
+print(tmp_16bit_data)
 
 time.sleep(1);
 print("Reading 32-bit registers")
 tmp_32bit_data = {}
 for addr in my_32bit_data.keys():
     tmp_32bit_data.update({addr: instr.read_long(addr)})
-
 assert (tmp_32bit_data == my_32bit_data)
+print (tmp_32bit_data)
 
 time.sleep(1);
 print("Reading 64-bit registers")
 tmp_64bit_data = {}
 for addr in my_64bit_data.keys():
     tmp_64bit_data.update({addr: instr.read_long(addr, number_of_registers=4)})
-
 assert (tmp_64bit_data == my_64bit_data)
+print(tmp_64bit_data)
 
 time.sleep(1);
+print("Reading 32-bit input registers")
+for addr in range(2):
+    print(instr.read_long(addr*2, functioncode=4))
 
+time.sleep(1);
+print("Reading 16-bit input registers")
+for addr in range(4, 8):
+    rv = instr.read_registers(addr, 1, functioncode=4)[0]
+    if addr < 6:
+        print(hex(rv))
+    else:
+        print(rv)
 print("Success!")
