@@ -1,0 +1,17 @@
+{
+	"name": "Test00",
+	"comment": "This is just a test.",
+	"secret": "None yet",
+	"daemon": {
+		"loglevel": "debug"
+	},
+	"mqtt": {
+		"data_sources": ["daisy/checkup", "daisy/event", "haldor/checkup", "haldor/event", "reporter/checkup_req", "power/run"],
+		"broker": "hal.maglab",
+		"port": 1883,
+		"timeout": 15,
+		"dis_timeout": 90,
+		"loglevel": "info"
+	},
+	"loglevel": "debug"
+}
