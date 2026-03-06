@@ -43,8 +43,10 @@ class TEST_CLASS(MAGDaemon):
         self.logger.debug("Calling super main")
         super().main()
         self.logger.info("Starting main loop")
+        self.loop_start()
         while not self.exit_evt.is_set():
-            self.loop_forever()
+            """ spin """
+            continue
 
         
         
